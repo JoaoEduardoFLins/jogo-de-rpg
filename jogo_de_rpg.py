@@ -3,6 +3,11 @@ class SerVivo:
         self.pontosDeVida = pontosDeVida
         self.pontosDeAtaque = pontosDeAtaque
 
+    def Ataque(self, ser_vivo_atacado):
+        ser_vivo_atacado.pontosDeVida = ser_vivo_atacado.pontosDeVida-self.pontosDeAtaque
+        print("O atacante causou ",self.pontosDeAtaque, " de dano no ser vivo atacado")
+        print(f"A vida do ser vivo atacado ficou em", ser_vivo_atacado.pontosDeVida)
+
 class Personagem(SerVivo):
     def __init__(self, pontosDeVida, pontosDeAtaque, nome):
         super().__init__(pontosDeVida, pontosDeAtaque)
@@ -24,11 +29,6 @@ class Goblin(Monstro):
     def MostrarDadosGoblin(self):
         print("\nO tipo de monstro é:",self.tipoMonstro,"\nPontos de vida: ",self.pontosDeVida,"\nPontos de ataque: ",self.pontosDeAtaque,"\nO nível de inteligência é: ",self.inteligencia)
 
-    def AtaqueGoblin(self,Personagem):
-        print("O dano do goblin no Personagem:",Personagem.nome," foi",self.pontosDeAtaque)
-        Personagem.pontosDeVida=Personagem.pontosDeVida-self.pontosDeAtaque
-        print("A vida do personagem caiu para:",Personagem.pontosDeVida)
-
 class Lobo(Monstro):
     def __init__(self, pontosDeVida, pontosDeAtaque, tipoMonstro, forca):
         super().__init__(pontosDeVida, pontosDeAtaque,tipoMonstro)
@@ -37,18 +37,13 @@ class Lobo(Monstro):
     def MostrarDadosLobo(self):
         print("\nO tipo de monstro é:",self.tipoMonstro,"\nPontos de vida: ",self.pontosDeVida,"\nPontos de ataque: ",self.pontosDeAtaque,"\nO nível de força é: ",self.forca)
 
-    def AtaqueLobo(self,Personagem):
-        print("O dano do lobo no Personagem:",Personagem.nome," foi",self.pontosDeAtaque)
-        Personagem.pontosDeVida=Personagem.pontosDeVida-self.pontosDeAtaque
-        print("A vida do personagem caiu para:",Personagem.pontosDeVida)
-        
 Personagem1 = Personagem(50, 10, "Personagem-1")
 Personagem1.MostrarDadosPersonagem()
 
 Goblin1 = Goblin(50,10,"Goblin-1",2)
 Goblin1.MostrarDadosGoblin()
-Goblin1.AtaqueGoblin(Personagem1)
+Goblin1.Ataque(Personagem1)
 
 Lobo1 = Lobo(100,20,"Lobo-1",10)
 Lobo1.MostrarDadosLobo()
-Lobo1.AtaqueLobo(Personagem1)
+Lobo1.Ataque(Personagem1)
